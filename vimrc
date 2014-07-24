@@ -176,3 +176,10 @@ augroup END
 
 
 autocmd BufRead,BufNewFile {*.md,*.mkd,*.markdown} setlocal filetype=markdown 
+
+
+if empty(glob('~/.vim/utils.vim'))
+    echom 'file ' . '~/.vim/utils.vim ' . 'not found'
+else
+    source ~/.vim/utils.vim
+endif
