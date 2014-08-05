@@ -158,7 +158,7 @@ augroup filetype_tex
 augroup END
 
 function! Tex_ForwardSearchLaTeX()
-    let cmd = '/Applications/Skim.app/Contents/SharedSupport/displayline -r ' . line(".") . ' ' . fnamemodify(Tex_GetMainFileName(), ":p:r") .  '.pdf ' . expand("%:p")
+    let cmd = '/Applications/Skim.app/Contents/SharedSupport/displayline -r ' . line(".") . ' ' . fnameescape(fnamemodify(Tex_GetMainFileName(), ":p:r")) .  '.pdf ' . fnameescape(expand("%:p"))
     let output = system(cmd)
 endfunction
 " }}}
