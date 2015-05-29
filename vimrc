@@ -6,7 +6,6 @@ endif
 call neobundle#begin(expand('~/.vim/bundle'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 NeoBundleCheck
 
 " github plugins
@@ -21,6 +20,7 @@ NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'garbas/vim-snipmate'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'szw/vim-dict'
+call neobundle#end()
 " }}}
 
 
