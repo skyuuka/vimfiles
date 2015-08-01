@@ -76,6 +76,9 @@ nnoremap <c-p> <PageUp>
 " ctrl + a to select all
 nnoremap <c-a> <esc>ggvG<cr>
 
+" clipboard
+set pastetoggle=<F2>
+
 " exit from insert mode to normal mode
 inoremap jk <esc>
 
