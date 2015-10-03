@@ -1,4 +1,5 @@
 " Use NeoBundle to manage plugins {{{
+
 set nocompatible
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -140,8 +141,15 @@ let g:Tex_MultipleCompileFormats = 'pdf'
 
 " define the compilation rule for pdf
 let g:Tex_CompileRule_pdf = 'pdflatex --shell-escape -synctex=1 --interaction=nonstopmode $*'
-" Use Skim to open PDF file, open -a Skim is Mac OS command
-let g:Tex_ViewRule_pdf = 'open -a Skim'
+
+if has('mac')
+    " Use Skim to open PDF file, open -a Skim is Mac OS command
+    let g:Tex_ViewRule_pdf = 'open -a Skim'
+else
+    if has('unix')
+        let g:Tex_ViewRule_pdf = 'okular'
+    endif
+endif
 
 " if set to 1, pressing \ll will take you to the first warning/error
 let g:Tex_GotoError = 1
@@ -157,10 +165,20 @@ augroup filetype_tex
     autocmd FileType tex setlocal textwidth=72
 augroup END
 
-function! Tex_ForwardSearchLaTeX()
-    let cmd = '/Applications/Skim.app/Contents/SharedSupport/displayline -r ' . line(".") . ' ' . fnameescape(fnamemodify(Tex_GetMainFileName(), ":p:r")) .  '.pdf ' . fnameescape(expand("%:p"))
-    let output = system(cmd)
-endfunction
+if has('mac')
+    function! Tex_ForwardSearchLaTeX()
+        let cmd = '/Applications/Skim.app/Contents/SharedSupport/displayline -r ' . line(".") . ' ' . fnameescape(fnamemodify(Tex_GetMainFileName(), ":p:r")) .  '.pdf ' . fnameescape(expand("%:p"))
+        let output = system(cmd)
+    endfunction
+else
+    if has('unix')
+        function! Tex_ForwardSearchLaTeX()
+            let cmd= "silent !okular --unique %:p:r.pdf\\#src:".line(".")."%:p &"
+            echo cmd
+            exec cmd 
+        endfunction
+    endif
+endif
 " }}}
 
 " NERDTRee {{{
