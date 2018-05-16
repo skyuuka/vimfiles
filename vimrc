@@ -185,7 +185,10 @@ endif
 " }}}
 
 " NERDTRee {{{
+" display hidden files
+let NERDTreeShowHidden=1
 nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>j :NERDTreeFind<CR>
 """ }}}
 
 
